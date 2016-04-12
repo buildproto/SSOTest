@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-// Helpers
-#import "UICKeychainStore.h"
+@class FBSDKAccessToken;
 
 @interface SharedLoginManager : NSObject
 
++ (SharedLoginManager *)sharedInstance;
 
+- (void)storeFacebookAccessToken:(FBSDKAccessToken *)token;
+- (void)clearFacebookAccessToken;
+- (FBSDKAccessToken *)loadFacebookAccessToken;
 
 @end

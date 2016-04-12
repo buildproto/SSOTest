@@ -15,6 +15,8 @@
 // Helpers
 #import "SharedLoginManager.h"
 
+static NSString * const kNotLoggedInText = @"Let's get you logged in bud";
+
 @interface ViewController () <FBSDKLoginButtonDelegate>
 
 @property IBOutlet FBSDKLoginButton *fbLoginButton;
@@ -28,12 +30,33 @@
 {
     [super viewDidLoad];
 
+    self.title = [[NSBundle mainBundle] bundleIdentifier];
+    
     self.fbLoginButton.readPermissions =
     @[@"public_profile", @"email", @"user_friends"];
+    
+    [self lookupAccessToken];
 }
 
 
--(void)fetchUserInfo
+- (void)lookupAccessToken
+
+{
+    // lookup the access token
+    FBSDKAccessToken *token = [[SharedLoginManager sharedInstance] loadFacebookAccessToken];
+    if (token) {
+        NSLog(@"found access token with string: %@", token.tokenString);
+        [FBSDKAccessToken setCurrentAccessToken:token];
+        [self fetchUserInfo];
+    }
+    else {
+        NSLog(@"not access token found");
+        self.statusLabel.text = kNotLoggedInText;
+        [FBSDKAccessToken setCurrentAccessToken:nil];
+    }
+}
+
+- (void)fetchUserInfo
 {
     if ([FBSDKAccessToken currentAccessToken])
     {
@@ -43,13 +66,18 @@
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error)
              {
-                 NSLog(@"resultis:%@",result);
+                 NSLog(@"result is:%@",result);
+                 self.statusLabel.text = [NSString stringWithFormat:@"Hey there, %@", result[@"name"]];
              }
              else
              {
                  NSLog(@"Error %@",error);
+                 self.statusLabel.text = kNotLoggedInText;
              }
          }];
+    }
+    else {
+        self.statusLabel.text = kNotLoggedInText;
     }
 }
 
@@ -64,7 +92,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
     }
     else {
         NSLog(@"FB login success, token: %@", result.token);
-        // TODO: save token to keychain (?)
+        [[SharedLoginManager sharedInstance] storeFacebookAccessToken:result.token];
+        [self fetchUserInfo];
     }
 }
 
@@ -75,6 +104,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
 {
     NSLog(@"FB: logged out");
+    
+    [[SharedLoginManager sharedInstance] clearFacebookAccessToken];
 }
 
 
