@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vI7-Jo-bXZ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="y4k-Pd-kR1">
+            <objects>
+                <navigationController id="vI7-Jo-bXZ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1QB-LP-ovJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="LIX-bD-NvR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NuO-jn-p72" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-362" y="357"/>
+        </scene>
+        <!--Delegate-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,8 +34,60 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Let's get you logged in bud" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdh-uL-0UP">
+                                <rect key="frame" x="0.0" y="20" width="600" height="300"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ljv-Ns-W28" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="150" y="500" width="300" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="8eH-In-tIC"/>
+                                    <constraint firstAttribute="height" constant="100" id="gIc-9c-OeL"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="D1Y-rv-GpH"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ljv-Ns-W28" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="B7y-ft-CTx"/>
+                            <constraint firstItem="Fdh-uL-0UP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="PHA-Ur-BNB"/>
+                            <constraint firstItem="Ljv-Ns-W28" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="PTH-df-REk"/>
+                            <constraint firstItem="Fdh-uL-0UP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Slc-mX-OFe"/>
+                            <constraint firstItem="Fdh-uL-0UP" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="fDw-xK-FBn"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Ljv-Ns-W28" secondAttribute="bottom" id="fLS-b8-V4y"/>
+                            <constraint firstItem="Fdh-uL-0UP" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="lOv-Oe-JsU"/>
+                            <constraint firstAttribute="trailing" secondItem="Fdh-uL-0UP" secondAttribute="trailing" id="nhs-dq-kRC"/>
+                            <constraint firstItem="Fdh-uL-0UP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="sjI-Bn-CVn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Fdh-uL-0UP" secondAttribute="trailing" id="uNt-DI-hzu"/>
+                            <constraint firstItem="Ljv-Ns-W28" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ws9-0v-jwg"/>
+                            <constraint firstAttribute="trailing" secondItem="Ljv-Ns-W28" secondAttribute="trailing" id="wyx-xa-saP"/>
+                            <constraint firstItem="Fdh-uL-0UP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="xGR-Wk-F2q"/>
+                            <constraint firstItem="Ljv-Ns-W28" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xPY-13-hLk"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="nhs-dq-kRC"/>
+                                <exclude reference="sjI-Bn-CVn"/>
+                                <exclude reference="uNt-DI-hzu"/>
+                                <exclude reference="xGR-Wk-F2q"/>
+                                <exclude reference="B7y-ft-CTx"/>
+                                <exclude reference="PTH-df-REk"/>
+                                <exclude reference="wyx-xa-saP"/>
+                                <exclude reference="xPY-13-hLk"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="Pt6-Lr-Vd7"/>
+                    <connections>
+                        <outlet property="fbLoginButton" destination="Ljv-Ns-W28" id="r01-F2-nTy"/>
+                        <outlet property="statusLabel" destination="Fdh-uL-0UP" id="mkh-Xg-4JY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
