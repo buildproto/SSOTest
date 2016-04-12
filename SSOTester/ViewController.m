@@ -97,10 +97,6 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
     }
 }
 
-/*!
- @abstract Sent to the delegate when the button was used to logout.
- @param loginButton The button that was clicked.
- */
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
 {
     NSLog(@"FB: logged out");
